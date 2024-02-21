@@ -1,7 +1,7 @@
 class Contato:
-    def __init__(self, nome, senha):
+    def __init__(self, nome, telefone):
         self.nome = nome
-        self.senha = senha
+        self.telefone = telefone
 
     def __str__(self):
-        return f"{self.nome}: {self.senha}"
+        return f"{self.nome}: {self.telefone}"
