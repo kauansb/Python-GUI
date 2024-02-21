@@ -1,32 +1,35 @@
 import mysql.connector
+class Banco:
+    def __init__(self):
+        # Configurações do banco de dados
+        self.host = 'localhost'
+        self.user = 'root'
+        self.password = ''
+        self.database = 'projeto_python'
+        self.connection = None
 
-# Configurações do banco de dados
-db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
-    'database': 'projeto_python'
-}
-
-# Conexão com o banco de dados
-def conectar():
-    try:
-        connection = mysql.connector.connect(**db_config)
-        return connection
-    except mysql.connector.Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
-
-# Função para executar consultas
-def executar_consulta(query, params=None, close_cursor=True):
-    connection = conectar()
-    if connection:
+    # Método para conectar ao banco de dados
+    def conectar(self):
         try:
-            cursor = connection.cursor()
+            self.connection = mysql.connector.connect(
+                host=self.host,
+                user=self.user,
+                password=self.password,
+                database=self.database
+            )
+            print("Conexão estabelecida com sucesso!")
+        except mysql.connector.Error as e:
+            print(f"Erro ao conectar ao banco de dados: {e}")
+
+    # Método para executar consultas
+    def executar_consulta(self, query, params=None):
+        try:
+            cursor = self.connection.cursor()
             if params:
                 cursor.execute(query, params)
             else:
                 cursor.execute(query)
-            connection.commit()
+            self.connection.commit()
             return cursor
         except mysql.connector.Error as e:
             print(f"Erro ao executar consulta: {e}")
