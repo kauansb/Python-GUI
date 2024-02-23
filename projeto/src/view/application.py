@@ -12,11 +12,7 @@ class Application:
     def create_widgets(self):
         data_frame = tk.Frame(self.master) # Cria um quadro (frame) dentro da janela principal para agrupar os widgets relacionados aos dados.
         data_frame.grid(row=0, column=1, padx=45, pady=28)
-
-        lista_frame = tk.Frame(self.master)
-        lista_frame.grid(row=0, column=1, padx=30, pady=20)
         
-
         tk.Label(data_frame, text="ID:").grid(row=0, column=0, padx=5, pady=2, sticky="e")
         self.entry_id = tk.Entry(data_frame) #Cria uma caixa de entrada (entry) para que o usuário insira o ID.
         self.entry_id.grid(row=0, column=1, padx=5, pady=2)
