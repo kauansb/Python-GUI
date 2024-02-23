@@ -4,17 +4,21 @@ from Crud import Crud
 
 class Application:
     def __init__(self, master):
-        self.master = master
+        self.master = master #Atribui a instância principal da janela Tkinter a um atributo master na instância da classe Application.
         self.master.title("Cadastro de Contatos")
-        self.create_widgets()
+        self.create_widgets() #Chama o método create_widgets() para criar os widgets (elementos da interface do usuário).
         self.crud = Crud()
 
     def create_widgets(self):
-        data_frame = tk.Frame(self.master)
+        data_frame = tk.Frame(self.master) # Cria um quadro (frame) dentro da janela principal para agrupar os widgets relacionados aos dados.
         data_frame.grid(row=0, column=1, padx=45, pady=28)
 
+        lista_frame = tk.Frame(self.master)
+        lista_frame.grid(row=0, column=1, padx=30, pady=20)
+        
+
         tk.Label(data_frame, text="ID:").grid(row=0, column=0, padx=5, pady=2, sticky="e")
-        self.entry_id = tk.Entry(data_frame)
+        self.entry_id = tk.Entry(data_frame) #Cria uma caixa de entrada (entry) para que o usuário insira o ID.
         self.entry_id.grid(row=0, column=1, padx=5, pady=2)
         
         tk.Label(data_frame, text="Nome:").grid(row=1, column=0, padx=5, pady=2, sticky="e")
@@ -25,7 +29,7 @@ class Application:
         self.entry_telefone = tk.Entry(data_frame)
         self.entry_telefone.grid(row=2, column=1, padx=5, pady=2)
 
-        button_frame = tk.Frame(self.master)
+        button_frame = tk.Frame(self.master) #Cria outro quadro para agrupar os botões de ação.
         button_frame.grid(row=1, column=1, padx=10, pady=5)
 
         tk.Button(button_frame, text="Adicionar", command=self.adicionar_contato).pack(side="left", padx=5)
