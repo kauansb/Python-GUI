@@ -11,7 +11,7 @@ class Application:
 
     def create_widgets(self):
         data_frame = tk.Frame(self.master)
-        data_frame.grid(row=0, column=0, padx=10, pady=5)
+        data_frame.grid(row=0, column=1, padx=45, pady=28)
 
         tk.Label(data_frame, text="ID:").grid(row=0, column=0, padx=5, pady=2, sticky="e")
         self.entry_id = tk.Entry(data_frame)
@@ -26,7 +26,7 @@ class Application:
         self.entry_telefone.grid(row=2, column=1, padx=5, pady=2)
 
         button_frame = tk.Frame(self.master)
-        button_frame.grid(row=1, column=0, padx=10, pady=5)
+        button_frame.grid(row=1, column=1, padx=10, pady=5)
 
         tk.Button(button_frame, text="Adicionar", command=self.adicionar_contato).pack(side="left", padx=5)
         tk.Button(button_frame, text="Atualizar", command=self.atualizar_contato).pack(side="left", padx=5)
