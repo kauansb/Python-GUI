@@ -27,7 +27,6 @@ class Crud:
         """
         return self.banco.executar_select(query)
 
-    # Implemente o método para obter o último ID de aluno inserido
     def obter_ultimo_id_aluno(self):
         query = "SELECT LAST_INSERT_ID() AS last_id"
         result = self.banco.executar_select(query)

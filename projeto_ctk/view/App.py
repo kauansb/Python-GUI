@@ -5,7 +5,7 @@ from Crud import Crud
 class Application():
     def __init__(self, app):
         self.app = app
-        app.title("Python GUI")
+        app.title("Python GUI - Cadastro de Aluno")
         app.geometry("650x400")
         self.create_widgets()
         self.crud = Crud()  # Instancie a classe Crud
