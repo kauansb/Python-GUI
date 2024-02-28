@@ -38,8 +38,6 @@ class Application():
         crud_frame.grid(row=0, column=1, padx=10, pady=5)
 
         ctk.CTkButton(crud_frame, text="Adicionar", command=self.adicionar_aluno).grid(row=0, column=0, padx=5, pady=2)
-        ctk.CTkButton(crud_frame, text="Editar", command=self.editar_aluno).grid(row=1, column=0, padx=5, pady=2)
-        ctk.CTkButton(crud_frame, text="Excluir").grid(row=2, column=0, padx=5, pady=2)
 
         # Bloco 3: Lista de Alunos
         self.lista_alunos = ctk.CTkTextbox(self.app, width=540, height=200) 
@@ -68,6 +66,7 @@ class Application():
         self.radio_var.set(0)
         self.curso_combobox.set("")
         self.email_entry.delete(0, tk.END)
+        self.carregar_lista_alunos()
 
     def obter_id_curso(self, nome_curso):
         cursos = self.crud.selecionar_cursos()
@@ -77,76 +76,15 @@ class Application():
         return None
     
     def carregar_lista_alunos(self):
-        if self.lista_alunos is None:  # Verifique se lista_alunos está inicializado
-            return
 
         # Limpe o conteúdo da caixa de texto
         self.lista_alunos.delete(1.0, tk.END)
 
         # Obtenha a lista de alunos da classe Crud
-        alunos = self.crud.selecionar_alunos()
+        alunos = self.crud.selecionar_alunos_com_cursos()
 
         # Adicione os alunos à lista
         for aluno in alunos:
-            self.lista_alunos.insert(tk.END, aluno['nome'] + '\n')  # Adicione '\n' para nova linha
-
-
-    
-    def editar_aluno(self):
-        # Obtenha o ID do aluno selecionado na lista
-        aluno_id = self.obter_id_aluno_selecionado()
-
-        # Se nenhum aluno estiver selecionado, retorne
-        if aluno_id is None:
-            return
-
-        # Obtenha os detalhes do aluno selecionado
-        aluno_selecionado = self.crud.obter_aluno_por_id(aluno_id)
-        if aluno_selecionado:
-            # Preencha os campos da GUI com os detalhes do aluno selecionado
-            self.nome_entry.delete(0, tk.END)
-            self.nome_entry.insert(tk.END, aluno_selecionado['nome'])
-            
-            if aluno_selecionado['sexo'] == 'M':
-                self.radio_var.set(1)
-            else:
-                self.radio_var.set(2)
-            
-            # Defina o curso selecionado na caixa de combinação
-            self.curso_combobox.set(aluno_selecionado['curso'])
-            
-            self.email_entry.delete(0, tk.END)
-            self.email_entry.insert(tk.END, aluno_selecionado['email'])
-
-            # Agora o usuário pode editar os detalhes e salvar as alterações
-
-
-    def excluir_aluno(self):
-        # Obtenha o ID do aluno selecionado na lista
-        aluno_id = self.obter_id_aluno_selecionado()
-
-        # Se nenhum aluno estiver selecionado, retorne
-        if aluno_id is None:
-            return
-
-        # Chame o método correspondente na classe Crud para excluir o aluno
-        self.crud.excluir_aluno(aluno_id)
-
-        # Atualize a lista de alunos na interface gráfica
-        self.carregar_lista_alunos()
-
-    def obter_id_aluno_selecionado(self):
-        # Obtenha o índice do aluno selecionado na lista
-        indice_selecionado = self.lista_alunos.curselection()
-
-        # Se nenhum aluno estiver selecionado, retorne None
-        if not indice_selecionado:
-            return None
-
-        # Obtenha o ID do aluno selecionado na lista
-        aluno_selecionado = self.lista_alunos.get(indice_selecionado[0])
-        alunos = self.crud.selecionar_alunos()
-        for aluno in alunos:
-            if aluno['nome'] == aluno_selecionado:
-                return aluno['id']
-        return None
+            # Concatene as informações do aluno para adicionar à lista
+            info_aluno = f"ID: {aluno['id']},  Nome: {aluno['nome']},  Curso: {aluno['nome_curso']},  Email: {aluno['email']}\n"
+            self.lista_alunos.insert(tk.END, info_aluno)

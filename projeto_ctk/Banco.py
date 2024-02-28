@@ -48,15 +48,3 @@ class Banco:
             return result
         except mysql.connector.Error as e:
             print(f"Erro ao executar consulta: {e}")
-
-    def executar_update_delete(self, query, params=None):
-        try:
-            cursor = self.connection.cursor()
-            if params:
-                cursor.execute(query, params)
-            else:
-                cursor.execute(query)
-            self.connection.commit()
-            cursor.close()
-        except mysql.connector.Error as e:
-            print(f"Erro ao executar consulta: {e}")
