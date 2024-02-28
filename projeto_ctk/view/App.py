@@ -33,7 +33,7 @@ class Application():
         self.email_entry = ctk.CTkEntry(frame)
         self.email_entry.grid(row=3, column=1, padx=5, pady=2)
 
-        # Botões CRUD
+        # Bloco 2: Botão
         crud_frame = ctk.CTkFrame(self.app)
         crud_frame.grid(row=0, column=1, padx=10, pady=5)
 
