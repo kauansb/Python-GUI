@@ -31,7 +31,7 @@ class Application2():
                 ctk.CTkRadioButton(info_frame, text="Feminino", variable=self.radio_var, value=2).grid(row=i, column=2, padx=0, pady=2, sticky="e")
             elif label_text == "Curso de Tecnologia:":
                 ctk.CTkLabel(info_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
-                self.curso_combobox = ctk.CTkComboBox(info_frame, values=["Python", "JavaScript", "Java", "PHP"])
+                self.curso_combobox = ctk.CTkComboBox(info_frame, values=["Python", "JavaScript", "Java", "PHP", "Análise de dados"])
                 self.curso_combobox.grid(row=i, column=1, padx=5, pady=5, columnspan=2, sticky="w")
             else:
                 self.entries[label_text] = ctk.CTkEntry(info_frame)
