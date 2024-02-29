@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from view.App import Application
-from view.App2 import Application2
+from view.AppCrud import Application2
 
 if __name__ == '__main__':
     root = ctk.CTk()
