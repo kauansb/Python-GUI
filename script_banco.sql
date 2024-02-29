@@ -22,3 +22,5 @@ CREATE TABLE matricula (
     FOREIGN KEY (aluno_id) REFERENCES aluno(id),
     FOREIGN KEY (curso_id) REFERENCES cursos(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO cursos(nome_curso) VALUES('Python'),('JavaScript'),('Java'),('PHP'),('Análise de dados');

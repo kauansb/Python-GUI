@@ -20,7 +20,7 @@ class Crud:
     
     def selecionar_alunos_com_cursos(self):
         query = """
-        SELECT aluno.id, aluno.nome, aluno.email, cursos.nome_curso
+        SELECT matricula.id, aluno.nome, aluno.email, cursos.nome_curso
         FROM aluno
         LEFT JOIN matricula ON aluno.id = matricula.aluno_id
         LEFT JOIN cursos ON matricula.curso_id = cursos.id
