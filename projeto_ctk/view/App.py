@@ -1,3 +1,4 @@
+#Aplicação original
 import customtkinter as ctk
 import tkinter as tk
 from Crud import Crud
@@ -6,7 +7,6 @@ class Application():
     def __init__(self, app):
         self.app = app
         app.title("Python GUI")
-        app.geometry("650x400")
         self.create_widgets()
         self.crud = Crud()  # Instancie a classe Crud
 
@@ -90,7 +90,7 @@ class Application():
     def carregar_lista_alunos(self):
 
         # Limpe o conteúdo da caixa de texto
-        self.lista_alunos.delete(1.0, tk.END)
+        self.lista_alunos.delete("0.0", tk.END)
 
         # Obtenha a lista de alunos da classe Crud
         alunos = self.crud.selecionar_alunos_com_cursos()
@@ -100,3 +100,4 @@ class Application():
             # Concatene as informações do aluno para adicionar à lista
             info_aluno = f"ID:  {aluno['id']}   Nome:   {aluno['nome']}  Curso:  {aluno['nome_curso']}   Email:  {aluno['email']}\n"
             self.lista_alunos.insert(tk.END, info_aluno)
+        self.lista_alunos.configure(state="disabled") # Desabilitando edições após inserts
