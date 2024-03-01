@@ -21,7 +21,7 @@ class CR_Ope:
 
     def selecionar_alunos_com_cursos(self):
         query = """ 
-        SELECT matricula.id, aluno.nome, aluno.sexo, aluno.email, cursos.nome_curso, COUNT(matricula.id) as total_mat
+        SELECT matricula.id, aluno.nome, aluno.sexo, aluno.email, cursos.nome_curso
         FROM aluno
         LEFT JOIN matricula ON aluno.id = matricula.aluno_id
         LEFT JOIN cursos ON matricula.curso_id = cursos.id
