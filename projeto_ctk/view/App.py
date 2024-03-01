@@ -19,26 +19,29 @@ class Application():
         main_frame.pack(expand=True, fill='both', padx=10, pady=10)
 
         # Cria um frame para o título da aplicação
-        title_frame = ctk.CTkFrame(main_frame, height=50)
+        title_frame = ctk.CTkFrame(main_frame, height=80)
         title_frame.pack(fill='x', padx=10, pady=(0, 10))
-        ctk.CTkLabel(title_frame, text="Cadastro de Aluno", font=('verdana', 20)).pack(padx=10, pady=5)
+        ctk.CTkLabel(title_frame, text="Projeto Final Python", font=('verdana', 20)).pack(padx=10, pady=5)
 
         # Criando o objeto CTkImage com a imagem
-        my_image = ctk.CTkImage(dark_image=Image.open("./projeto_ctk/view/python.jpeg"), size=(80, 80))
+        my_image = ctk.CTkImage(dark_image=Image.open("./projeto_ctk/view/python.jpeg"), size=(50, 50))
 
         # Exibindo a imagem em um rótulo
         image_label = ctk.CTkLabel(main_frame, image=my_image, text="")
         image_label.pack(anchor='n', side='left',padx=10, pady=10)
 
+        info_frame = ctk.CTkFrame(main_frame)
+        info_frame.pack(anchor='w', side='top', padx=20, pady=(10, 5))
+        ctk.CTkLabel(info_frame, text="Formulário Para Cadastro de Alunos", font=('Verdana', 16)).grid(row=0, column=1, padx=50, pady=15)
         # Cria um frame para informações do aluno
         form_frame = ctk.CTkFrame(main_frame)
-        form_frame.pack(anchor='n', side='left', padx=10, pady=5)
+        form_frame.pack(anchor='w', side='left', padx=20, pady=10)
 
         # Cria labels e entradas para os campos de nome, gênero, curso e e-mail
         labels = ["Nome:", "Gênero:", "Curso de Tecnologia:", "E-mail:"]
         self.entries = {}
         for i, label_text in enumerate(labels):
-            ctk.CTkLabel(form_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
+            ctk.CTkLabel(form_frame, text=label_text).grid(row=i, column=0, padx=5, pady=20, sticky="e")
             if label_text == "Gênero:":
                 self.radio_var = tk.IntVar(value=0)
                 ctk.CTkRadioButton(form_frame, text="Masculino", variable=self.radio_var, value=1).grid(row=i, column=1, padx=0, pady=2, sticky="w")
@@ -53,8 +56,8 @@ class Application():
 
         # Cria um frame para botão de adicionar aluno
         btn_frame = ctk.CTkFrame(main_frame)
-        btn_frame.pack(anchor='n', side='left', padx=10, pady=10)
-        ctk.CTkButton(btn_frame, text="Adicionar", command=self.adicionar_aluno).pack(padx=5, pady=2)
+        btn_frame.pack(anchor='w', side='left', padx=10, pady=10)
+        ctk.CTkButton(btn_frame, text="Adicionar", command=self.adicionar_aluno).pack(padx=10, pady=10)
         ctk.CTkButton(btn_frame, text="Exportar Lista", command=self.exportar_lista_alunos).pack(padx=10, pady=10)
 
         # Cria um frame para exibir a lista de alunos
