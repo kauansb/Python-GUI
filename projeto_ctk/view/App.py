@@ -73,8 +73,12 @@ class Application():
                 entry.delete(0, tk.END)
             self.curso_combobox.set("")
 
+            tk.messagebox.showinfo("Sucesso", "Aluno cadastrado com sucesso!")
+
             # Carrega a lista de alunos após a inserção bem-sucedida
             self.carregar_lista_alunos()
+        else:
+            tk.messagebox.showinfo("Erro", "Falha ao realizar matrícula")
 
     # Método para obter o ID do curso a partir do nome do curso
     def obter_id_curso(self, nome_curso):
