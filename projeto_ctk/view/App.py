@@ -1,6 +1,7 @@
 import customtkinter as ctk 
 import tkinter as tk  
 from CR_Ope import CR_Ope as cr  
+from PIL import Image  # Importa classes necessárias do Pillow
 
 class Application():
     def __init__(self, app):
@@ -9,6 +10,7 @@ class Application():
         self.create_widgets()  # Chama o método para criar os widgets da interface gráfica
         self.cr = cr()  # Instâcia da classe CR_Ope para realizar operações CRUD no banco de dados
         self.carregar_lista_alunos()  # Carrega a lista de alunos na interface gráfica
+
 
     # Método para criar os widgets da interface gráfica
     def create_widgets(self):
@@ -21,37 +23,53 @@ class Application():
         title_frame.pack(fill='x', padx=10, pady=(0, 10))
         ctk.CTkLabel(title_frame, text="Cadastro de Aluno", font=('verdana', 20)).pack(padx=10, pady=5)
 
+        # Criando o objeto CTkImage com a imagem
+        my_image = ctk.CTkImage(dark_image=Image.open("./projeto_ctk/view/python.jpeg"), size=(80, 80))
+
+        # Exibindo a imagem em um rótulo
+        image_label = ctk.CTkLabel(main_frame, image=my_image, text="")
+        image_label.pack(anchor='n', side='left',padx=10, pady=10)
+
         # Cria um frame para informações do aluno
-        info_frame = ctk.CTkFrame(main_frame)
-        info_frame.pack(anchor='n', side='left', padx=10, pady=5)
+        form_frame = ctk.CTkFrame(main_frame)
+        form_frame.pack(anchor='n', side='left', padx=10, pady=5)
 
         # Cria labels e entradas para os campos de nome, gênero, curso e e-mail
         labels = ["Nome:", "Gênero:", "Curso de Tecnologia:", "E-mail:"]
         self.entries = {}
         for i, label_text in enumerate(labels):
-            ctk.CTkLabel(info_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
+            ctk.CTkLabel(form_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
             if label_text == "Gênero:":
                 self.radio_var = tk.IntVar(value=0)
-                ctk.CTkRadioButton(info_frame, text="Masculino", variable=self.radio_var, value=1).grid(row=i, column=1, padx=0, pady=2, sticky="w")
-                ctk.CTkRadioButton(info_frame, text="Feminino", variable=self.radio_var, value=2).grid(row=i, column=2, padx=0, pady=2, sticky="e")
+                ctk.CTkRadioButton(form_frame, text="Masculino", variable=self.radio_var, value=1).grid(row=i, column=1, padx=0, pady=2, sticky="w")
+                ctk.CTkRadioButton(form_frame, text="Feminino", variable=self.radio_var, value=2).grid(row=i, column=2, padx=0, pady=2, sticky="e")
             elif label_text == "Curso de Tecnologia:":
-                ctk.CTkLabel(info_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
-                self.curso_combobox = ctk.CTkComboBox(info_frame, values=["Python", "JavaScript", "Java", "PHP", "Análise de dados"])
+                ctk.CTkLabel(form_frame, text=label_text).grid(row=i, column=0, padx=5, pady=5, sticky="e")
+                self.curso_combobox = ctk.CTkComboBox(form_frame, values=["Python", "JavaScript", "Java", "PHP", "Análise de dados"])
                 self.curso_combobox.grid(row=i, column=1, padx=5, pady=5, columnspan=2, sticky="w")
             else:
-                self.entries[label_text] = ctk.CTkEntry(info_frame)
+                self.entries[label_text] = ctk.CTkEntry(form_frame)
                 self.entries[label_text].grid(row=i, column=1, padx=5, pady=5, sticky="w")
 
         # Cria um frame para botão de adicionar aluno
-        crud_frame = ctk.CTkFrame(main_frame)
-        crud_frame.pack(anchor='n', side='left', padx=10, pady=10)
-        ctk.CTkButton(crud_frame, text="Adicionar", command=self.adicionar_aluno).pack(padx=5, pady=2)
+        btn_frame = ctk.CTkFrame(main_frame)
+        btn_frame.pack(anchor='n', side='left', padx=10, pady=10)
+        ctk.CTkButton(btn_frame, text="Adicionar", command=self.adicionar_aluno).pack(padx=5, pady=2)
+        ctk.CTkButton(btn_frame, text="Exportar Lista", command=self.exportar_lista_alunos).pack(padx=10, pady=10)
 
         # Cria um frame para exibir a lista de alunos
         list_frame = ctk.CTkFrame(main_frame)
         list_frame.pack(fill='both', expand=True, padx=10, pady=10)
         self.lista_alunos = ctk.CTkTextbox(list_frame, width=540, height=200)
         self.lista_alunos.pack(fill='both', expand=True)
+
+    def exportar_lista_alunos(self):
+        alunos = self.cr.selecionar_alunos_com_cursos()
+        with open("lista_alunos.csv", "w") as f:
+            for aluno in alunos:
+                linha = f"{aluno['id']},{aluno['nome']},{aluno['sexo']},{aluno['nome_curso']},{aluno['email']}\n"
+                f.write(linha)
+        tk.messagebox.showinfo("Exportar", "Lista de alunos exportada com sucesso para lista_alunos.csv")
 
     # Método para adicionar um novo aluno
     def adicionar_aluno(self):
