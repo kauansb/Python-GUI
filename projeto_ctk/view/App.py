@@ -1,7 +1,7 @@
 import customtkinter as ctk 
 import tkinter as tk  
 from CR_Ope import CR_Ope as cr  
-from PIL import Image  # Importa classes necessárias do Pillow
+from PIL import Image
 
 class Application():
     def __init__(self, app):
@@ -10,7 +10,6 @@ class Application():
         self.create_widgets()  # Chama o método para criar os widgets da interface gráfica
         self.cr = cr()  # Instâcia da classe CR_Ope para realizar operações CRUD no banco de dados
         self.carregar_lista_alunos()  # Carrega a lista de alunos na interface gráfica
-
 
     # Método para criar os widgets da interface gráfica
     def create_widgets(self):
@@ -31,7 +30,7 @@ class Application():
         image_label.pack(anchor='n', side='left',padx=10, pady=10)
 
         info_frame = ctk.CTkFrame(main_frame)
-        info_frame.pack(anchor='w', side='top', padx=20, pady=(10, 5))
+        info_frame.pack(anchor='w', side='top', padx=20, pady=5)
         ctk.CTkLabel(info_frame, text="Formulário Para Cadastro de Alunos", font=('Verdana', 16)).grid(row=0, column=1, padx=50, pady=15)
         # Cria um frame para informações do aluno
         form_frame = ctk.CTkFrame(main_frame)

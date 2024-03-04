@@ -2,14 +2,12 @@ import mysql.connector
 
 class Banco:
     def __init__(self):
-        # Configurações do banco de dados
         self.host = 'localhost'
         self.user = 'root'
         self.password = ''
         self.database = 'projeto_python'
         self.connection = None
 
-    # Método para conectar ao banco de dados
     def conectar(self):
         try:
             self.connection = mysql.connector.connect(

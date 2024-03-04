@@ -1,5 +1,5 @@
-import customtkinter as ctk  # Importa a biblioteca CustomTkinter com o alias ctk
-from view.App import Application  # Importa a classe Application do módulo view/App
+import customtkinter as ctk
+from view.App import Application
 
 if __name__ == '__main__':
     # Cria uma instância da classe CTk() para criar uma janela principal
