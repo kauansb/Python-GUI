@@ -28,7 +28,6 @@ class Banco:
                 # Se houver parâmetros, executa a consulta com os parâmetros
                 cursor.execute(query, params)
             else:
-                # Caso contrário, executa a consulta sem parâmetros
                 cursor.execute(query)
             self.connection.commit()  # Confirma as alterações no banco de dados
             last_row_id = cursor.lastrowid  # Obtém o ID da última linha inserida
@@ -48,6 +47,6 @@ class Banco:
                 cursor.execute(query)
             result = cursor.fetchall()  # Obtém todos os resultados da consulta
             cursor.close()
-            return result  # Retorna os resultados da consulta
+            return result
         except mysql.connector.Error as e:
             print(f"Erro ao executar consulta: {e}")
