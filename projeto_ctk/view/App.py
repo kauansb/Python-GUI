@@ -22,13 +22,6 @@ class Application():
         title_frame.pack(fill='x', padx=10, pady=(0, 10))
         ctk.CTkLabel(title_frame, text="Projeto Final Python", font=('verdana', 20)).pack(padx=10, pady=5)
 
-        # Criando o objeto CTkImage com a imagem
-        my_image = ctk.CTkImage(dark_image=Image.open("./projeto_ctk/view/python.jpeg"), size=(50, 50))
-
-        # Exibindo a imagem em um rótulo
-        image_label = ctk.CTkLabel(main_frame, image=my_image, text="")
-        image_label.pack(anchor='n', side='left',padx=10, pady=10)
-
         info_frame = ctk.CTkFrame(main_frame)
         info_frame.pack(anchor='w', side='top', padx=20, pady=5)
         ctk.CTkLabel(info_frame, text="Formulário Para Cadastro de Alunos", font=('Verdana', 16)).grid(row=0, column=1, padx=50, pady=15)
