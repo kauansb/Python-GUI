@@ -108,6 +108,6 @@ class Application():
         alunos = self.cr.selecionar_alunos_com_cursos()  # Seleciona todos os alunos com cursos do banco de dados
         for aluno in alunos:
             # Formata as informações do aluno e adiciona na área de texto
-            info_aluno = f"ID:  {aluno['id']}   Nome:   {aluno['nome']}  Curso:  {aluno['nome_curso']}   Email:  {aluno['email']}\n"
+            info_aluno = f"ID: {aluno['id']: <5} | Nome: {aluno['nome']: <10} | Curso: {aluno['nome_curso']: <20} | Email: {aluno['email']}\n\n"
             self.lista_alunos.insert(tk.END, info_aluno)
         self.lista_alunos.configure(state="disabled")  # Desabilita edição novamente
